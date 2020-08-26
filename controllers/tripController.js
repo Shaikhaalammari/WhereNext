@@ -3,6 +3,15 @@ const slugify = require("slugify");
 //data
 const { Trip } = require("../db/models");
 
+exports.fetchTrip = async (tripId, next) => {
+  try {
+    const trip = await Trip.findByPk(tripId);
+    return trip;
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.tripList = async (req, res) => {
   try {
     const trips = await Trip.findAll({
@@ -18,7 +27,7 @@ exports.tripCreate = async (req, res) => {
   try {
     const newTrip = await Trip.create(req.body);
     res.status(201).json(newTrip);
-  } catch (error) {
+  } catch {
     res.status(500).json({ message: error.message });
   }
 };
