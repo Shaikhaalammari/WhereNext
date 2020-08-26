@@ -5,9 +5,9 @@ const bodyParser = require("body-parser");
 // const passport = require("passport");
 // const jwtStrategy = require("passport-jwt").Strategy;
 
-//DB
+// DB
 const db = require("./db");
-const { Trip } = require("./db/models");
+const { Trip } = require("./db/models"); // you don't need to import models here, remove this line
 
 // Routes
 const tripRoutes = require("./routes/trips");
@@ -18,13 +18,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-//Routers
+// Routers
 app.use("/trips", tripRoutes);
 
-//Not Found Paths
+// Not Found Paths
 app.use((req, res, next) => {
   res.status(404).json({ message: "Path not found" });
 });
+
+// Error handling middleware?
 
 const run = async () => {
   try {

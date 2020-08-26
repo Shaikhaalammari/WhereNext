@@ -13,9 +13,11 @@ const {
 // middleware
 // const upload = require("../middleware/storage");
 
+// Remove these two lines
 // router.param("tripId", async (req, res, next, tripId) => {
 //   const trip = await fetchTrip(tripId, next);
 
+// move this route below router.param(...)
 router.get("/", tripList);
 
 router.param("tripId", async (req, res, next, tripId) => {
@@ -33,6 +35,7 @@ router.param("tripId", async (req, res, next, tripId) => {
 });
 
 // Trip Update
+// why are permissions and image middleware commented out?
 router.put(
   "/:tripId",
   //   passport.authenticate("jwt", { session: false }),

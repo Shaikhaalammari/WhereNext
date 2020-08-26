@@ -1,4 +1,4 @@
-//DATA
+//DATA <-- ??
 const { Trip } = require("../db/models");
 
 exports.fetchTrip = async (tripId, next) => {
@@ -24,6 +24,7 @@ exports.tripList = async (req, res) => {
 
 exports.tripCreate = async (req, res) => {
   try {
+    // you have to assign the logged in user as the creator of this new trip
     const newTrip = await Trip.create(req.body);
     res.status(201).json(newTrip);
   } catch {
@@ -33,6 +34,7 @@ exports.tripCreate = async (req, res) => {
 
 exports.tripUpdate = async (req, res, next) => {
   try {
+    // you don't need this if-statement, it's already being handled by router.param(...) in the routes file
     if (req.trip) {
       await req.trip.update(req.body);
       res.status(204).end();
@@ -45,6 +47,8 @@ exports.tripUpdate = async (req, res, next) => {
 };
 
 exports.tripDelete = async (req, res) => {
+  // you dont need to find the the Trip object based on ID this way, the router.param(...) handles it for you.
+  // the same way you access the trip object in the tripUpdate controller
   const { tripId } = req.params;
   try {
     const foundTrip = await Trip.findByPk(tripId);
