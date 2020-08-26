@@ -3,8 +3,13 @@ const cors = require("cors");
 const db = require("./db/db");
 
 const app = express();
-
 app.use(cors());
+
+// Routes
+const tripRoutes = require("./routes/trips");
+
+//Routers
+app.use("/trips", tripRoutes);
 
 const run = async () => {
   try {

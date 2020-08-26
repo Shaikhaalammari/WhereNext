@@ -11,15 +11,15 @@ Trip.init(
     detail: {
       type: DataTypes.STRING,
     },
-    date: {
-      type: DataTypes.DATE,
-    },
-    image: {
-      type: DataTypes.STRING,
-    },
-    location: {
-      type: DataTypes.STRING,
-    },
+    // date: {
+    //   type: DataTypes.DATE,
+    // },
+    // image: {
+    //   type: DataTypes.STRING,
+    // },
+    // location: {
+    //   type: DataTypes.STRING,
+    // },
   },
   {
     sequelize: db,
