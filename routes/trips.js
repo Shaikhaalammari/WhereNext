@@ -40,9 +40,6 @@ router.put(
   tripUpdate
 );
 
-// create trip
-router.post("/", tripCreate);
-
 // delete trip
 router.delete("/:tripId", tripDelete);
 
