@@ -8,7 +8,10 @@ Trip.init(
     title: {
       type: DataTypes.STRING,
     },
+    // I think title and details are required.
+    // The question I want you to ask yourselves is: Do you want to allow users to create a trip without a title/details?
 
+    // should be `details`, not `detail`. It's not a single detail, it's many details of their trip and experience.
     detail: {
       type: DataTypes.STRING,
     },
