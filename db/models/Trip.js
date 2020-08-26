@@ -1,4 +1,5 @@
 const { DataTypes, Model } = require("sequelize");
+const SequelizeSlugify = require("sequelize-slugify");
 const db = require("../db");
 
 class Trip extends Model {}
@@ -8,6 +9,7 @@ Trip.init(
     title: {
       type: DataTypes.STRING,
     },
+
     detail: {
       type: DataTypes.STRING,
     },
