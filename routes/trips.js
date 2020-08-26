@@ -1,14 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-
-
-
-  
-
-router.param("tripId", async (req, res, next, tripId) => {
-  const trip = await fetchTrip(tripId, next);
 //Controllers
+const {
   tripUpdate,
   tripCreate,
   fetchTrip,
@@ -18,6 +12,9 @@ router.param("tripId", async (req, res, next, tripId) => {
 
 // middleware
 // const upload = require("../middleware/storage");
+
+// router.param("tripId", async (req, res, next, tripId) => {
+//   const trip = await fetchTrip(tripId, next);
 
 router.get("/", tripList);
 
@@ -35,8 +32,6 @@ router.param("tripId", async (req, res, next, tripId) => {
   }
 });
 
-
-
 // Trip Update
 router.put(
   "/:tripId",
@@ -50,6 +45,5 @@ router.post("/", tripCreate);
 
 // delete trip
 router.delete("/:tripId", tripDelete);
-
 
 module.exports = router;
