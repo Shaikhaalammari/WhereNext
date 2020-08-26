@@ -1,8 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
+
+
+
+  
+
+router.param("tripId", async (req, res, next, tripId) => {
+  const trip = await fetchTrip(tripId, next);
 //Controllers
-const {
+  tripUpdate,
   tripCreate,
   fetchTrip,
   tripList,
@@ -17,6 +24,7 @@ router.get("/", tripList);
 router.param("tripId", async (req, res, next, tripId) => {
   console.log(`The value of trip's ID is ${tripId}`);
   const trip = await fetchTrip(tripId, next);
+
   if (trip) {
     req.trip = trip;
     next();
@@ -27,10 +35,21 @@ router.param("tripId", async (req, res, next, tripId) => {
   }
 });
 
+
+
+// Trip Update
+router.put(
+  "/:tripId",
+  //   passport.authenticate("jwt", { session: false }),
+  //   upload.single("image"),
+  tripUpdate
+);
+
 // create trip
 router.post("/", tripCreate);
 
 // delete trip
 router.delete("/:tripId", tripDelete);
+
 
 module.exports = router;

@@ -5,6 +5,17 @@ const path = require("path");
 const passport = require("passport");
 const jwtStrategy = require("passport-jwt").Strategy;
 
+
+const app = express();
+app.use(cors());
+
+// Routes
+const tripRoutes = require("./routes/trips");
+
+//Routers
+app.use("/trips", tripRoutes);
+
+
 //DB
 const db = require("./db");
 const { Trip } = require("./db/models");
@@ -23,6 +34,7 @@ app.use("/trips", tripRoutes);
 app.use((req, res, next) => {
   res.status(404).json({ message: "Path not found" });
 });
+
 
 const run = async () => {
   try {
