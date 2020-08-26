@@ -11,6 +11,7 @@ const { Trip } = require("./db/models");
 
 // Routes
 const tripRoutes = require("./routes/trips");
+const profileRoutes = require("./routes/profiles");
 
 // Create Express App instance
 const app = express();
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 
 //Routers
 app.use("/trips", tripRoutes);
+app.use("/profiles", profileRoutes);
 
 //Not Found Paths
 app.use((req, res, next) => {
