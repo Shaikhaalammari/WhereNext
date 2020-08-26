@@ -10,7 +10,6 @@ exports.fetchTrip = async (tripId, next) => {
   }
 };
 
-// Trip List
 exports.tripList = async (req, res) => {
   try {
     const trips = await Trip.findAll({
