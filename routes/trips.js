@@ -1,14 +1,28 @@
 const express = require("express");
 const router = express.Router();
 
-//Controllers
-const {
-  tripUpdate,
-  tripList,
-  fetchTrip,
-} = require("../controllers/tripController");
+
+
+
+  
 
 router.param("tripId", async (req, res, next, tripId) => {
+  const trip = await fetchTrip(tripId, next);
+//Controllers
+  tripUpdate,
+  tripCreate,
+  fetchTrip,
+  tripList,
+  tripDelete,
+} = require("../controllers/tripController");
+
+// middleware
+// const upload = require("../middleware/storage");
+
+router.get("/", tripList);
+
+router.param("tripId", async (req, res, next, tripId) => {
+  console.log(`The value of trip's ID is ${tripId}`);
   const trip = await fetchTrip(tripId, next);
 
   if (trip) {
@@ -21,8 +35,7 @@ router.param("tripId", async (req, res, next, tripId) => {
   }
 });
 
-//Trip List
-router.get("/", tripList);
+
 
 // Trip Update
 router.put(
@@ -31,5 +44,12 @@ router.put(
   //   upload.single("image"),
   tripUpdate
 );
+
+// create trip
+router.post("/", tripCreate);
+
+// delete trip
+router.delete("/:tripId", tripDelete);
+
 
 module.exports = router;
