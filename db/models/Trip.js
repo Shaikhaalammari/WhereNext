@@ -9,10 +9,7 @@ Trip.init(
     title: {
       type: DataTypes.STRING,
     },
-    slug: {
-      type: DataTypes.STRING,
-      unique: true,
-    },
+
     detail: {
       type: DataTypes.STRING,
     },
@@ -30,7 +27,5 @@ Trip.init(
     sequelize: db,
   }
 );
-SequelizeSlugify.slugifyModel(Trip, {
-  source: ["name"],
-});
+
 module.exports = Trip;
