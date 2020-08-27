@@ -11,6 +11,8 @@ const { localStrategy, jwtStrategy } = require("./middleware/passport");
 // Routes
 const tripRoutes = require("./routes/trips");
 const userRoutes = require("./routes/users");
+const profileRoutes = require("./routes/profiles");
+
 // Create Express App instance
 const app = express();
 
@@ -26,8 +28,11 @@ passport.use(jwtStrategy);
 
 //Routers
 app.use("/trips", tripRoutes);
+
 app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(userRoutes);
+app.use("/profiles", profileRoutes);
+
 
 //Not Found Paths
 app.use((req, res, next) => {

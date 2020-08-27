@@ -34,6 +34,7 @@ router.param("tripId", async (req, res, next, tripId) => {
 // Trip Update
 router.put("/:tripId", upload.single("image"), tripUpdate);
 
+
 // create trip
 router.post("/", upload.single("image"), tripCreate);
 
