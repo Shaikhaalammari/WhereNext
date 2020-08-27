@@ -7,7 +7,7 @@ const db = require("./db");
 //passport
 const passport = require("passport");
 // Passport Strategies
-const { localStrategy } = require("./middleware/passport");
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
 // Routes
 const tripRoutes = require("./routes/trips");
 const userRoutes = require("./routes/users");
@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 });
 app.use(passport.initialize());
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //Routers
 app.use("/trips", tripRoutes);
