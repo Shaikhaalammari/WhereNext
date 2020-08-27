@@ -10,6 +10,13 @@ exports.fetchProfile = async (profileId, next) => {
   }
 };
 
+/**
+ * Why is there a profile list? No no no nonooo......
+ * You don't need to view a list of all profiles
+ * There's no feature for this in the trello board
+ * so remove this profile list controller
+ * and remove the route using it
+ */
 // Profile List
 exports.profileList = async (req, res) => {
   try {
@@ -27,6 +34,12 @@ exports.profileList = async (req, res) => {
   }
 };
 
+// why is there profile create?
+// again, nono nonono ono nono...........
+// theres no feature for this
+// no one CREATES a profile
+// they only edit their profile
+// so delete this controller and the route using it
 exports.profileCreate = async (req, res) => {
   try {
     const newProfile = await Profile.create(req.body);
@@ -49,6 +62,9 @@ exports.profileUpdate = async (req, res, next) => {
   }
 };
 
+// why is there a profile delete? no one deletes their profile
+// remove this
+// no feature for this in trello
 exports.profileDelete = async (req, res) => {
   const { profileId } = req.params;
   try {
@@ -64,6 +80,7 @@ exports.profileDelete = async (req, res) => {
   }
 };
 
+// this trip create should be in tripController
 exports.tripCreate = async (req, res) => {
   try {
     req.body.profileId = req.profile.id;
