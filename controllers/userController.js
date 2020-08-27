@@ -17,7 +17,6 @@ exports.signup = async (req, res, next) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
-      role: newUser.role,
       expires: Date.now() + JWT_EXPIRATION_MS,
     };
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
@@ -29,13 +28,13 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res, next) => {
   const { user } = req;
+  // const profile = await Profile.findOne({ where: { userId: user.id } });
   const payload = {
     id: user.id,
     username: user.username,
     email: user.email,
     firstName: user.firstName,
     lastName: user.lastName,
-    role: user.role,
     expires: Date.now() + parseInt(JWT_EXPIRATION_MS), // the token will expire 15 minutes from when it's generated
   };
   const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);

@@ -10,7 +10,6 @@ exports.localStrategy = new LocalStrategy(async (username, password, done) => {
     const user = await User.findOne({
       where: { username },
     });
-    // const profile = await Profile.findOne({ where: { userId: user.id } });
 
     const passwordsMatch = user
       ? await bcrypt.compare(password, user.password)
@@ -38,6 +37,7 @@ exports.jwtStrategy = new JWTStrategy(
     } catch (error) {
       done(error);
     }
+    //return done check it
   }
 );
 
