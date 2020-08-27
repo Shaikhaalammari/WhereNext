@@ -19,7 +19,7 @@ const {
 router.get("/", tripList);
 
 router.param("tripId", async (req, res, next, tripId) => {
-  console.log(`The value of trip's ID is ${tripId}`);
+  console.log(`The value of trip's ID is ${tripId}`); // remove this console log
   const trip = await fetchTrip(tripId, next);
 
   if (trip) {

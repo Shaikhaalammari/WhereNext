@@ -14,13 +14,9 @@ const {
 // middleware
 // const upload = require("../middleware/storage");
 
-// router.param("tripId", async (req, res, next, tripId) => {
-//   const trip = await fetchTrip(tripId, next);
-
 router.get("/", profileList);
 
 router.param("profileId", async (req, res, next, profileId) => {
-  console.log(`The value of profile's ID is ${profileId}`);
   const profile = await fetchProfile(profileId, next);
 
   if (profile) {
@@ -41,12 +37,19 @@ router.put(
   profileUpdate
 );
 
+// delete this
 // create profile
 router.post("/", profileCreate);
 
+// delete this
 // delete profile
 router.delete("/:profileId", profileDelete);
 
+// move this to trips.js
+// also, no need to pass profile ID
+// you get the profile ID by finding the profile object
+// associated with the logged in user
+// you can only do this if authentication is built
 // create trip
 router.post("/:profileId/trips", tripCreate);
 

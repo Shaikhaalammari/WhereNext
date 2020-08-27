@@ -15,6 +15,8 @@ exports.tripList = async (req, res) => {
   try {
     const trips = await Trip.findAll({
       attributes: { exclude: ["profileId", "createdAt", "updatedAt"] },
+      // don't include the profiles here
+      // this is the trip list, you dont need every trip's profile
       inlcude: {
         model: Profile,
         as: "profile",
