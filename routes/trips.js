@@ -18,7 +18,6 @@ const {
 router.get("/", tripList);
 
 router.param("tripId", async (req, res, next, tripId) => {
-  console.log(`The value of trip's ID is ${tripId}`);
   const trip = await fetchTrip(tripId, next);
 
   if (trip) {
@@ -31,9 +30,11 @@ router.param("tripId", async (req, res, next, tripId) => {
   }
 });
 
+// create trip
+router.post("/:profileId/trips", tripCreate);
+
 // Trip Update
 router.put("/:tripId", upload.single("image"), tripUpdate);
-
 
 // create trip
 router.post("/", upload.single("image"), tripCreate);

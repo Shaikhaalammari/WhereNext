@@ -17,10 +17,7 @@ const {
 // router.param("tripId", async (req, res, next, tripId) => {
 //   const trip = await fetchTrip(tripId, next);
 
-router.get("/", profileList);
-
 router.param("profileId", async (req, res, next, profileId) => {
-  console.log(`The value of profile's ID is ${profileId}`);
   const profile = await fetchProfile(profileId, next);
 
   if (profile) {
@@ -40,14 +37,5 @@ router.put(
   //   upload.single("image"),
   profileUpdate
 );
-
-// create profile
-router.post("/", profileCreate);
-
-// delete profile
-router.delete("/:profileId", profileDelete);
-
-// create trip
-router.post("/:profileId/trips", tripCreate);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 //DATA
-const { Profile, Trip } = require("../db/models");
+const { Profile } = require("../db/models");
 
 exports.fetchProfile = async (profileId, next) => {
   try {
@@ -7,32 +7,6 @@ exports.fetchProfile = async (profileId, next) => {
     return profile;
   } catch (error) {
     next(error);
-  }
-};
-
-// Profile List
-exports.profileList = async (req, res) => {
-  try {
-    const profiles = await Profile.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: {
-        model: Trip,
-        as: "trips",
-        attributes: ["id"],
-      },
-    });
-    res.json(profiles);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.profileCreate = async (req, res) => {
-  try {
-    const newProfile = await Profile.create(req.body);
-    res.status(201).json(newProfile);
-  } catch {
-    res.status(500).json({ message: error.message });
   }
 };
 
@@ -46,30 +20,5 @@ exports.profileUpdate = async (req, res, next) => {
     }
   } catch (error) {
     next(error);
-  }
-};
-
-exports.profileDelete = async (req, res) => {
-  const { profileId } = req.params;
-  try {
-    const foundProfile = await Profile.findByPk(profileId);
-    if (foundProfile) {
-      await foundProfile.destroy();
-      res.status(204).end();
-    } else {
-      res.status(404).json({ message: "Profile not found" });
-    }
-  } catch (err) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.tripCreate = async (req, res) => {
-  try {
-    req.body.profileId = req.profile.id;
-    const newTrip = await Trip.create(req.body);
-    res.status(201).json(newTrip);
-  } catch {
-    res.status(500).json({ message: error.message });
   }
 };
