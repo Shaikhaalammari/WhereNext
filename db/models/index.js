@@ -1,5 +1,6 @@
 const Profile = require("./Profile");
 const Trip = require("./Trip");
+const User = require("./User");
 
 Profile.hasMany(Trip, {
   as: "trips",
@@ -10,5 +11,7 @@ Trip.belongsTo(Profile, { as: "profile" });
 
 module.exports = {
   Trip,
+  User,
+=======
   Profile,
 };
