@@ -18,6 +18,8 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// REVIEW: Remove this middleware you don't need it
 app.use((req, res, next) => {
   console.log("I'm a middleware method");
   next();
@@ -32,7 +34,6 @@ app.use("/trips", tripRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(userRoutes);
 app.use("/profiles", profileRoutes);
-
 
 //Not Found Paths
 app.use((req, res, next) => {

@@ -12,6 +12,7 @@ const {
   tripDelete,
 } = require("../controllers/tripController");
 
+// REVIEW: remove commented out if you dont need it
 // router.param("tripId", async (req, res, next, tripId) => {
 //   const trip = await fetchTrip(tripId, next);
 
@@ -29,6 +30,8 @@ router.param("tripId", async (req, res, next, tripId) => {
     next(err);
   }
 });
+
+// REVIEW: Why is create trip repeated? Remove one of them
 
 // create trip
 router.post("/:profileId/trips", tripCreate);

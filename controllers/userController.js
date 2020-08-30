@@ -8,6 +8,7 @@ exports.signup = async (req, res, next) => {
   const saltRounds = 10;
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // REVIEW: remove console log
     console.log("exports.signup -> hashedPassword", hashedPassword);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
@@ -36,6 +37,7 @@ exports.signin = async (req, res, next) => {
     firstName: user.firstName,
     lastName: user.lastName,
     expires: Date.now() + parseInt(JWT_EXPIRATION_MS), // the token will expire 15 minutes from when it's generated
+    // REVIEW: Remove this comment. مكانها غلط
   };
   const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
   res.json({ token });
