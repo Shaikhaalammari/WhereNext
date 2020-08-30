@@ -40,6 +40,15 @@ exports.tripUpdate = async (req, res, next) => {
   }
 };
 
+exports.tripCreate = async (req, res) => {
+  try {
+    const newTrip = await Trip.create(req.body);
+    res.status(201).json(newTrip);
+  } catch {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 exports.tripDelete = async (req, res) => {
   const { tripId } = req.params;
   try {

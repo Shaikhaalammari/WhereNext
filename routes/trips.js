@@ -32,6 +32,9 @@ router.param("tripId", async (req, res, next, tripId) => {
   }
 });
 
+// trip create
+router.post("/", tripCreate);
+
 // Trip Update
 router.put(
   "/:tripId",
