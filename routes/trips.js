@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+//middleware multer
+const upload = require("../middleware/multer");
 
 //Controllers
 const {
@@ -10,16 +12,12 @@ const {
   tripDelete,
 } = require("../controllers/tripController");
 
-// middleware
-// const upload = require("../middleware/storage");
-
 // router.param("tripId", async (req, res, next, tripId) => {
 //   const trip = await fetchTrip(tripId, next);
 
 router.get("/", tripList);
 
 router.param("tripId", async (req, res, next, tripId) => {
-  console.log(`The value of trip's ID is ${tripId}`);
   const trip = await fetchTrip(tripId, next);
 
   if (trip) {
@@ -35,13 +33,14 @@ router.param("tripId", async (req, res, next, tripId) => {
 // trip create
 router.post("/", tripCreate);
 
+// create trip
+router.post("/:profileId/trips", tripCreate);
+
 // Trip Update
-router.put(
-  "/:tripId",
-  //   passport.authenticate("jwt", { session: false }),
-  //   upload.single("image"),
-  tripUpdate
-);
+router.put("/:tripId", upload.single("image"), tripUpdate);
+
+// create trip
+router.post("/", upload.single("image"), tripCreate);
 
 // delete trip
 router.delete("/:tripId", tripDelete);
