@@ -33,7 +33,6 @@ app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(userRoutes);
 app.use("/profiles", profileRoutes);
 
-
 //Not Found Paths
 app.use((req, res, next) => {
   console.log(404);
@@ -50,7 +49,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync({ alter: true });
+    await db.sync();
     console.log("Connection to the database successful!");
   } catch (error) {
     console.error("Error connecting to the database: ", error);

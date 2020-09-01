@@ -1,14 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 //Controllers
 const {
   profileUpdate,
-  profileCreate,
+
   fetchProfile,
-  profileList,
-  profileDelete,
-  tripCreate,
 } = require("../controllers/profileController");
 
 // middleware
@@ -32,8 +30,8 @@ router.param("profileId", async (req, res, next, profileId) => {
 
 // Profile Update
 router.put(
-  "/:profileId",
-  //   passport.authenticate("jwt", { session: false }),
+  "/",
+  passport.authenticate("jwt", { session: false }),
   //   upload.single("image"),
   profileUpdate
 );

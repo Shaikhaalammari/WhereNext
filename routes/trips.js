@@ -31,7 +31,7 @@ router.param("tripId", async (req, res, next, tripId) => {
 });
 
 // create trip
-router.post("/:profileId/trips", tripCreate);
+router.post("/trips", tripCreate);
 
 // Trip Update
 router.put("/:tripId", upload.single("image"), tripUpdate);
