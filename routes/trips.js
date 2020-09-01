@@ -40,6 +40,7 @@ router.put("/:tripId", upload.single("image"), tripUpdate);
 // create trip
 router.post(
   "/",
+  // REVIEW: there's a typo, it's session not seesion.
   passport.authenticate("jwt", { seesion: false }),
   upload.single("image"),
   tripCreate

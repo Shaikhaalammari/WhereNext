@@ -21,7 +21,6 @@ exports.tripList = async (req, res) => {
   }
 };
 
-
 exports.tripCreate = async (req, res, next) => {
   if (req.user.id === req.tprofile.userId) {
     if (req.file) {
@@ -38,6 +37,9 @@ exports.tripCreate = async (req, res, next) => {
     next(err);
   }
 };
+
+// REVIEW: DELETE COMMENTED OUT CODE
+
 // exports.tripCreate = async (req, res) => {
 //   try {
 //     const newTrip = await Trip.create(req.body);
