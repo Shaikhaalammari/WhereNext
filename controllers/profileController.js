@@ -1,20 +1,14 @@
 //DATA
 const { Profile } = require("../db/models");
 
-exports.fetchProfile = async (profileId, next) => {
+exports.profileUpdate = async (req, res, next) => {
   try {
-    const profile = await Profile.findByPk(profileId);
-    return profile;
+    const profile = await Profile.findOne(req.user.profileId);
+    await profile.update(req.body);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
 };
 
-exports.profileUpdate = async (req, res, next) => {
-  if (req.user.id === req.profile.userId) {
-    await req.profile.update(req.body);
-    res.status(204).end();
-  } else {
-    next(error);
-  }
-};
+// i neeeeed a get
