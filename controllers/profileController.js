@@ -11,14 +11,11 @@ exports.fetchProfile = async (profileId, next) => {
 };
 
 exports.profileUpdate = async (req, res, next) => {
-  try {
-    if (req.profile) {
-      await req.profile.update(req.body);
-      res.status(204).end();
-    } else {
-      res.status(404).json({ message: "Profile not found" });
-    }
-  } catch (error) {
+  if (req.user || req.user.id === req.profile.userId) {
+    // not sure about it need to test
+    await req.profile.update(req.body);
+    res.status(204).end();
+  } else {
     next(error);
   }
 };

@@ -12,9 +12,9 @@ Trip.init(
     detail: {
       type: DataTypes.STRING,
     },
-    date: {
-      type: DataTypes.DATE,
-    },
+    // date: {
+    //   type: DataTypes.DATE,
+    // },
     image: {
       type: DataTypes.STRING,
     },
