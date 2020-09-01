@@ -8,19 +8,18 @@ exports.signup = async (req, res, next) => {
   const saltRounds = 10;
   try {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    console.log("exports.signup -> hashedPassword", hashedPassword);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
-    // const newProfile = await Profile.create(req.body);
+    const profile = { userId: newUser.id, bio: "", image: "" };
+    const newProfile = await Profile.create(profile);
     const payload = {
       id: newUser.id,
       username: newUser.username,
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
-      // id: newProfile.id, // hope its right !!!!
-      // bio: newProfile.bio, // biio and id are not showin
-      // image: newProfile.image,
+      bio: newProfile.bio, // biio and id are not showin
+      image: newProfile.image,
       expires: Date.now() + JWT_EXPIRATION_MS,
     };
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
