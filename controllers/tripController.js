@@ -21,15 +21,30 @@ exports.tripList = async (req, res) => {
   }
 };
 
-exports.tripCreate = async (req, res) => {
-  try {
+exports.tripCreate = async (req, res, next) => {
+  if (req.user.id === req.tprofile.userId) {
+    if (req.file) {
+      req.body.image = `${req.protocol}://${req.get("host")}/media/${
+        req.file.filename
+      }`;
+    }
     req.body.profileId = req.profile.id;
     const newTrip = await Trip.create(req.body);
     res.status(201).json(newTrip);
-  } catch {
-    res.status(500).json({ message: error.message });
+  } else {
+    const err = new Error("Unauthorized");
+    err.status = 401;
+    next(err);
   }
 };
+// exports.tripCreate = async (req, res) => {
+//   try {
+//     const newTrip = await Trip.create(req.body);
+//     res.status(201).json(newTrip);
+//   } catch {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 exports.tripUpdate = async (req, res, next) => {
   if (req.user || req.user.id === req.trip.userId) {
@@ -44,20 +59,6 @@ exports.tripUpdate = async (req, res, next) => {
     const err = new Error("Unauthorized");
     err.status = 401;
     next(err);
-  }
-  //     res.status(404).json({ message: "Trip not found" });
-  //   }
-  // } catch (error) {
-  //   next(error);
-  // }
-};
-
-exports.tripCreate = async (req, res) => {
-  try {
-    const newTrip = await Trip.create(req.body);
-    res.status(201).json(newTrip);
-  } catch {
-    res.status(500).json({ message: error.message });
   }
 };
 

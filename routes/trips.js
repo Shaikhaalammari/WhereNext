@@ -32,10 +32,14 @@ router.param("tripId", async (req, res, next, tripId) => {
 });
 
 // trip create
-router.post("/", tripCreate);
+router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
 
 // create trip
-router.post("/:profileId/trips", tripCreate);
+router.post(
+  "/:profileId/trips",
+  passport.authenticate("jwt", { session: false }),
+  tripCreate
+);
 
 // Trip Update
 router.put("/:tripId", upload.single("image"), tripUpdate);
