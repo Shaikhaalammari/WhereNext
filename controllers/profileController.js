@@ -11,8 +11,7 @@ exports.fetchProfile = async (profileId, next) => {
 };
 
 exports.profileUpdate = async (req, res, next) => {
-  if (req.user || req.user.id === req.profile.userId) {
-    // not sure about it need to test
+  if (req.user.id === req.profile.userId) {
     await req.profile.update(req.body);
     res.status(204).end();
   } else {
