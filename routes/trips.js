@@ -11,6 +11,7 @@ const {
   tripList,
   tripDelete,
 } = require("../controllers/tripController");
+const passport = require("passport");
 
 // router.param("tripId", async (req, res, next, tripId) => {
 //   const trip = await fetchTrip(tripId, next);
@@ -40,9 +41,18 @@ router.post("/:profileId/trips", tripCreate);
 router.put("/:tripId", upload.single("image"), tripUpdate);
 
 // create trip
-router.post("/", upload.single("image"), tripCreate);
+router.post(
+  "/",
+  passport.authenticate("jwt", { seesion: false }),
+  upload.single("image"),
+  tripCreate
+);
 
 // delete trip
-router.delete("/:tripId", tripDelete);
+router.delete(
+  "/:tripId",
+  passport.authenticate("jwt", { session: false }),
+  tripDelete
+);
 
 module.exports = router;
