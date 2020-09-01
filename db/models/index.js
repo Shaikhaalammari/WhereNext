@@ -14,6 +14,7 @@ User.hasOne(Profile, { as: "profile", foreignKey: "userId" }); // foreign key th
 
 Profile.belongsTo(User, { as: "user" });
 
+
 module.exports = {
   Trip,
   User,
