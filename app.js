@@ -18,10 +18,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-// app.use((req, res, next) => {
-//   console.log("I'm a middleware method");
-//   next();
-// });
+
 app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
