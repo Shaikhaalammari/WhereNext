@@ -10,6 +10,11 @@ User.hasMany(Trip, {
 
 Trip.belongsTo(User, { as: "user" });
 
+User.hasOne(Profile, { as: "profile", foreignKey: "userId" }); // foreign key the column in DB
+
+Profile.belongsTo(User, { as: "user" });
+
+
 module.exports = {
   Trip,
   User,

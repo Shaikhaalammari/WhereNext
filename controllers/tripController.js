@@ -21,6 +21,7 @@ exports.tripList = async (req, res) => {
   }
 };
 
+
 exports.tripCreate = async (req, res, next) => {
   if (req.user.id === req.tprofile.userId) {
     if (req.file) {

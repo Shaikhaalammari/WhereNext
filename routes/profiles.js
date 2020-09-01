@@ -1,21 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 //Controllers
 const {
   profileUpdate,
-  profileCreate,
   fetchProfile,
-  profileList,
-  profileDelete,
-  tripCreate,
 } = require("../controllers/profileController");
-
-// middleware
-// const upload = require("../middleware/storage");
-
-// router.param("tripId", async (req, res, next, tripId) => {
-//   const trip = await fetchTrip(tripId, next);
 
 router.param("profileId", async (req, res, next, profileId) => {
   const profile = await fetchProfile(profileId, next);
@@ -33,7 +24,7 @@ router.param("profileId", async (req, res, next, profileId) => {
 // Profile Update
 router.put(
   "/:profileId",
-  //   passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   //   upload.single("image"),
   profileUpdate
 );
