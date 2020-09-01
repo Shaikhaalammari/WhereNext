@@ -5,8 +5,11 @@ const passport = require("passport");
 //Controllers
 const {
   profileUpdate,
-  fetchProfile,
+  profileList,
 } = require("../controllers/profileController");
+
+//profile list
+router.get("/", profileList);
 
 // Profile Update
 router.put(

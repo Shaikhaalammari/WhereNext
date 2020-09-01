@@ -11,4 +11,13 @@ exports.profileUpdate = async (req, res, next) => {
   }
 };
 
-// i neeeeed a get
+exports.profileList = async (req, res) => {
+  try {
+    const profiles = await Profile.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
+    res.json(profiles);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
