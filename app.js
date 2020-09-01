@@ -18,10 +18,10 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use((req, res, next) => {
-  console.log("I'm a middleware method");
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log("I'm a middleware method");
+//   next();
+// });
 app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -32,7 +32,6 @@ app.use("/trips", tripRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(userRoutes);
 app.use("/profiles", profileRoutes);
-
 
 //Not Found Paths
 app.use((req, res, next) => {
@@ -50,7 +49,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync({ alter: true });
+    await db.sync();
     console.log("Connection to the database successful!");
   } catch (error) {
     console.error("Error connecting to the database: ", error);
