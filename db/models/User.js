@@ -29,10 +29,6 @@ User.init(
     lastName: {
       type: DataTypes.STRING,
     },
-    role: {
-      type: DataTypes.STRING,
-      defaultValue: "user",
-    },
   },
   {
     sequelize: db,
