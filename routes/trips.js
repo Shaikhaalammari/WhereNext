@@ -40,7 +40,7 @@ router.put("/:tripId", upload.single("image"), tripUpdate);
 // create trip
 router.post(
   "/",
-  passport.authenticate("jwt", { seesion: false }),
+  passport.authenticate("jwt", { session: false }),
   upload.single("image"),
   tripCreate
 );

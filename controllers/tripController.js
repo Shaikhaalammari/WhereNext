@@ -21,7 +21,6 @@ exports.tripList = async (req, res) => {
   }
 };
 
-
 exports.tripCreate = async (req, res, next) => {
   if (req.user.id === req.tprofile.userId) {
     if (req.file) {
@@ -38,14 +37,6 @@ exports.tripCreate = async (req, res, next) => {
     next(err);
   }
 };
-// exports.tripCreate = async (req, res) => {
-//   try {
-//     const newTrip = await Trip.create(req.body);
-//     res.status(201).json(newTrip);
-//   } catch {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 exports.tripUpdate = async (req, res, next) => {
   if (req.user || req.user.id === req.trip.userId) {
