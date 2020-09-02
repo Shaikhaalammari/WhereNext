@@ -23,10 +23,9 @@ exports.tripList = async (req, res) => {
 
 exports.tripCreate = async (req, res) => {
   try {
-    req.body.profileId = req.profile.id;
     const newTrip = await Trip.create(req.body);
     res.status(201).json(newTrip);
-  } catch {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
