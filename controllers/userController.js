@@ -42,6 +42,8 @@ exports.signin = async (req, res, next) => {
     bio: profile.bio,
     image: profile.image,
 
+
+
     expires: Date.now() + parseInt(JWT_EXPIRATION_MS), // the token will expire 15 minutes from when it's generated
   };
   const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
