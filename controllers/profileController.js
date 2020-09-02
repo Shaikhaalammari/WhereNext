@@ -1,24 +1,23 @@
 //DATA
 const { Profile } = require("../db/models");
 
-exports.fetchProfile = async (profileId, next) => {
+exports.profileUpdate = async (req, res, next) => {
   try {
-    const profile = await Profile.findByPk(profileId);
-    return profile;
+    const profile = await Profile.findOne(req.user.profileId);
+    await profile.update(req.body);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
 };
 
-exports.profileUpdate = async (req, res, next) => {
+exports.profileList = async (req, res) => {
   try {
-    if (req.profile) {
-      await req.profile.update(req.body);
-      res.status(204).end();
-    } else {
-      res.status(404).json({ message: "Profile not found" });
-    }
+    const profiles = await Profile.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
+    res.json(profiles);
   } catch (error) {
-    next(error);
+    res.status(500).json({ message: error.message });
   }
 };

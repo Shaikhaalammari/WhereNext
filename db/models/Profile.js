@@ -5,13 +5,10 @@ class Profile extends Model {}
 
 Profile.init(
   {
-    title: {
+    bio: {
       type: DataTypes.STRING,
     },
 
-    detail: {
-      type: DataTypes.STRING,
-    },
     image: {
       type: DataTypes.STRING,
     },
