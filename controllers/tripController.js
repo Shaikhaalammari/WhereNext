@@ -21,22 +21,15 @@ exports.tripList = async (req, res) => {
   }
 };
 
-
 exports.tripCreate = async (req, res, next) => {
-  if (req.user.id === req.tprofile.userId) {
-    if (req.file) {
-      req.body.image = `${req.protocol}://${req.get("host")}/media/${
-        req.file.filename
-      }`;
-    }
-    req.body.profileId = req.profile.id;
-    const newTrip = await Trip.create(req.body);
-    res.status(201).json(newTrip);
-  } else {
-    const err = new Error("Unauthorized");
-    err.status = 401;
-    next(err);
+  if (req.file) {
+    req.body.image = `${req.protocol}://${req.get("host")}/media/${
+      req.file.filename
+    }`;
   }
+  req.body.userId = req.user.id;
+  const newTrip = await Trip.create(req.body);
+  res.status(201).json(newTrip);
 };
 
 exports.tripUpdate = async (req, res, next) => {
