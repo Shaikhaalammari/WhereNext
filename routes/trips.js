@@ -37,14 +37,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
 // Trip Update
 router.put("/:tripId", upload.single("image"), tripUpdate);
 
-// create trip
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  upload.single("image"),
-  tripCreate
-);
-
 // delete trip
 router.delete(
   "/:tripId",
