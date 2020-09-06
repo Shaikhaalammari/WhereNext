@@ -18,9 +18,6 @@ Trip.init(
     image: {
       type: DataTypes.STRING,
     },
-    location: {
-      type: DataTypes.STRING,
-    },
   },
   {
     sequelize: db,
