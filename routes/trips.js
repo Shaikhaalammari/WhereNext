@@ -35,7 +35,12 @@ router.param("tripId", async (req, res, next, tripId) => {
 router.post("/", passport.authenticate("jwt", { session: false }), tripCreate);
 
 // Trip Update
-router.put("/:tripId", upload.single("image"), tripUpdate);
+router.put(
+  "/:tripId",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  tripUpdate
+);
 
 // delete trip
 router.delete(
