@@ -3,6 +3,11 @@ const { Profile } = require("../db/models");
 
 exports.profileUpdate = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = `${req.protocol}://${req.get("host")}/media/${
+        req.file.filename
+      }`;
+    }
     const profile = await Profile.findOne(req.user.profileId);
     await profile.update(req.body);
     res.status(204).end();

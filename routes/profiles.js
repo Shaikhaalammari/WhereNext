@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const upload = require("../middleware/multer");
 
 //Controllers
 const {
@@ -15,7 +16,7 @@ router.get("/", profileList);
 router.put(
   "/",
   passport.authenticate("jwt", { session: false }),
-  //   upload.single("image"),
+  upload.single("image"),
   profileUpdate
 );
 
